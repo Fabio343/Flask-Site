@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Site</title>
+  <link rel="stylesheet" href="static/css/style.css">
+</head>
+
+<body>
+   <asside class="menu">
+     <div class="main_content menu_content">
+       <header>
+          <a href="{{url_for('home')}}"><img src="static/images/my_logo.png" alt="logo_site" class="logo"></a>
+      </header>
+       <nav>
+        <ul>
+          <li>
+            <a href="{{url_for('home')}}">Home</a>
+          </li>
+          <li>
+            <a href="{{url_for('aboutpage')}}">About me</a>
+          </li>
+          <li>
+            <a href="#new_section">My Codes</a>
+          </li>
+          <li>
+            <a href="#games">What I like to do?</a>
+          </li>
+          <li>
+            <a href="{{url_for('contatopage')}}">Aks me</a>
+          </li>
+          <li>
+            <a href="{{url_for('results')}}">All Comments</a>
+          </li>
+          <li>
+            <a href="{{url_for('login')}}">Login</a>
+          </li>
+        </ul>
+       </nav>
+     </div>
+   </asside>
+   <div class="menu-spacing branco_fundo"></div>
+   <section class="main_back section">
+        <div class="main_content menu_content">
+          <div class="texto">
+            <h3>what I know ?</h3>
+             <p>PYTHON - I started programming in python a year after I entered college (2017), and I've been working ever since.
+                 I developed simple web pages with this language and during my graduation I interned in large companies where
+                 I improved my knowledge about programming and concepts about machine learning, data science in general.</p> <br>
+             <p>SQL - Sql is not a very strong side that I have, but I know the basic concepts and I can do CRUD (create, read, update and delete a record),
+                 on this page some systems were built that use interactions between python, sql and html.</p> <br>
+             <p>HTML and CSS - I already worked with html and css to build a web page with Django Framework in my first year of college,
+                 but I didn't focus much on that language and this year I went back to learning more about it,
+                 mainly because I started to develop pages using Flask Framework (the which I used to develop this small site),
+                 and today I have a pre-intermediate level of html and css programming. </p><br>
+             <p>
+                 OTHER POINTS - In my work at Trigger (Credit Startup) and I learned to replicate excel activities in python and thus use less time to better analyze
+                 customer profiles to offer or not to offer a credit card or some other benefit, in addition to using python to create new processes for the company
+                 to replace activities that were usually done completely manually.
+             </p>
+          </div>
+   </section>
+   <div class="menu-spacing branco_fundo"></div>
+   <section class="branco_fundo section" id="new_section">
+        <div class="main_content menu_content ">
+          <div class="texto">
+            <h3>My Codes</h3>
+            <h5>In this section you can see my codes that I developed to exemplify what I know about modeling,
+                they are simple models but if you start with the basics you can go so far.
+                (There is a link where you can see the examples in more detail)</h5>
+              <div class="menu-spacing"></div>
+             <h5>Random Forest Model Example</h5>
+             <p><code>
+             # -*- coding: utf-8 -*- <br>
+                Modelo_Random_Forest.ipynb<br>
+                <div class="main_content menu_content title_section" >
+                     <a class="title_section color_link" target="_blank" href="https://colab.research.google.com/drive/1jHfVbSCMrVHtlc_f4DbJdrlx2QZcMEco#scrollTo=R-UqtRwok43a">
+                     Original file is located Here!</a>.
+                </div>
+             </code></p>
+                <p><code>
+                import pandas as pd<br>
+                import numpy as np<br>
+                import seaborn as sns<br>
+                import matplotlib.pyplot as plt<br>
+                from warnings import filterwarnings<br>
+                base_dados = pd.read_excel('BaseDados_FlorestaDeDecisão.xlsx','Plan1')<br>
+                #Plan2 is the data for inputs and new tests<br>
+                #Plan1 is the data for modeling<br>
+                </code></p>
+                 <p><code>
+                base_dados.head()<br>
+                #1 did not use, 2 services, 3 thefts<br>
+                base_dados.info()<br>
+                base_dados.describe()<br>
+                </code></p>
+                ## -- graphic analysis -- ##<br>
+                <p><code>
+                sns.set(font_scale=1.5,rc={'figure.figsize':(20,20)})<br>
+                eixo=base_dados.hist(bins=20,color='red')<br>
+               </code></p>
+               <p><code>
+                plt.figure(figsize=(10,5))<br>
+                sns.boxplot(data=base_dados,x='Serviço',y='Idade')<br>
+               </code></p>
+               <p><code>
+                plt.figure(figsize=(10,5))<br>
+                sns.boxplot(data=base_dados,x='Serviço',y='Preço Seguro')<br>
+               </code></p>
+               <p><code>
+                plt.figure(figsize=(10,5))<br>
+                sns.boxplot(data=base_dados,x='Serviço',y='CEP')<br>
+                </code></p>
+                 <p><code>
+                # Divisão dos dados em treino e teste<br>
+
+                caracteristica=base_dados.iloc[:,1:4].values<br>
+                previsor =base_dados.iloc[:,4:5]<br>
+                </code></p>
+                <p><code>
+                from sklearn.model_selection import train_test_split
+                x_treino,x_test,y_treino,y_test=train_test_split(caracteristica,previsor,
+                                        test_size=0.30,random_state=10)<br>
+                </code></p>
+                 <p><code>
+                ## Construindo o modelo ##<br>
+                from sklearn.ensemble import RandomForestClassifier
+                floresta=RandomForestClassifier(n_estimators=500)<br>
+                floresta.fit(x_treino,y_treino)<br>
+                 </code></p>
+                 <p><code>
+                ## Analyzing the model ##<br>
+                previsoes=floresta.predict(x_test)<br>
+                from sklearn.metrics import confusion_matrix<br>
+                matrix=confusion_matrix(y_test,previsoes)<br>
+                print(matrix)<br>
+                plt.figure(figsize=(10,5))<br>
+                sns.heatmap(matrix,annot=True)<br>
+                 # pay attention if we have a coherent separation of the data in the matrix
+                 #because it may happen that the model manages to separate a set of characteristics well
+                 #but be bad for another, and if that happens you should revise the model or take another type
+                 # of decision, for example modeling the cases separately<br>
+               </code></p>
+                <p><code>
+                ## model accuracy<br>
+                from sklearn.metrics import classification_report<br>
+                report=classification_report(y_test,previsoes)<br>
+                print(report)<br>
+                #recall - percentage of correct answers than what was actually classified<br>
+                #precision - attempt to classify a case that will be triggered<br>
+               </code></p>
+                <p><code>
+                ## Making future predictions ##<br>
+                novas_entradas=pd.read_excel('BaseDados_FlorestaDeDecisão.xlsx','Plan2')<br>
+                #selecting features<br>
+                prever=novas_entradas.iloc[:,1:4].values<br>
+                novas_entradas['Previsoes Modelo']=floresta.predict(prever)<br>
+                novas_entradas<br>
+                novas_entradas['Previsoes Modelo'].value_counts()<br>
+                </code>
+                </p>
+          </div>
+   </section>
+    </div>
+   <section class="branco_fundo2 section" id="new_section">
+        <div class="main_content menu_content">
+          <div class="texto">
+              <div class="menu-spacing"></div>
+             <h5>Logistic Regression Model Example</h5>
+             <p><code>
+                    # logistic regression<br>
+                    # rating issues<br>
+                    # binary response<br>
+                    # models such as exam diagnostics, time, fraud<br>
+                     <div class="main_content menu_content title_section" >
+                     <a class="title_section color_link" target="_blank" href="https://colab.research.google.com/drive/1hl1N9NCkNPsEM6glSYwG4d-nD7EBCMKE">
+                     Original file is located Here!</a>.
+                     </div><br>
+
+                    ###---------- Calculations ----------###<br>
+                    # 1-yes / 0-no<br>
+                    # sigmoid function -> P=1/(1+e^(-y)) - returns a prob. occurrence of a<br>
+                    #event, always between 0 and 1<br>
+                    #y is the line that best separates the data we have (example who bought and<br>
+                    #who didn't buy a product x)<br><br>
+
+
+                    ###-------- Starting process with data --------###<br>
+
+                    import pandas as pd # model<br>
+                    import numpy as np # matrices<br>
+                    import matplotlib.pyplot as plt #graphics<br>
+                    import seaborn as sns #graphics<br>
+                </code>
+                </p>
+              <p><code>
+                    base_dados = pd.read_excel('BaseDados_RegressaoLogistica.xlsx', 'Plan1')<br>
+                    base_dados.info()<br>
+
+                    ### graphics<br>
+
+                    sns.set(font_scale=1.3,rc={'figure.figsize':(20,20)})<br>
+                    eixo=base_dados.hist(bins=20,color='blue')<br>
+              </code></p>
+              <p><code>
+                    plt.figure(figsize=(10,5))<br>
+                    sns.boxplot(data=base_dados,x='Tipo Renda',y='Renda');<br>
+                                      plt.figure(figsize=(10,5))<br>
+                    sns.boxplot(data=base_dados,x='Possui Imóvel',y='Renda');<br><br>
+
+                    plt.figure(figsize=(10,5))<br>
+                    sns.boxplot(data=base_dados,x='Comprou?',y='Renda');<br><br>
+
+                    plt.figure(figsize=(10,5))<br>
+                    sns.scatterplot(data=base_dados,x='Renda' , y='Comprou?')<br><br>
+
+                    ## ---- Creating Templates ---- ##<br>
+                    # data separation<br>
+                    caracteristica= base_dados.iloc[:,1:4].values<br>
+                    previsor=base_dados.iloc[:,4:5].values<br><br>
+
+                    #separation into training and testing<br>
+                    from sklearn.model_selection import train_test_split<br>
+                    x_treino,x_test,y_treino,y_test = train_test_split(caracteristica,previsor,test_size=0.20)<br><br>
+
+                    from sklearn.linear_model import LogisticRegression<br>
+                    # function receiving the set of calculations seen before<br>
+                    funcao_logistica=LogisticRegression()<br>
+                    funcao_logistica.fit(x_treino,y_treino)<br><br>
+
+                    previsoes = funcao_logistica.predict(x_test)<br>
+                    print(previsoes)<br>
+                    print()<br>
+                    print(y_test)<br><br>
+
+                    #matrix prediction - comparing hits and misses<br>
+
+                    from sklearn.metrics import confusion_matrix<br>
+                    print(confusion_matrix(y_test,previsoes))<br><br>
+
+
+                    from sklearn.metrics import classification_report<br>
+                    # check other measures<br>
+                    # recall - the percentage of right allocation (what went wrong based on predictions)<br>
+                    # precision - the percentage of success when the objective is true<br>
+                    print(classification_report(y_test,previsoes))<br><br>
+
+                    ## - Predictions - ##<br>
+                    salario=4500<br>
+                    Tipo_Renda=2<br>
+                    Possui_Imovel=0<br>
+                    parametro=[[salario,Tipo_Renda,Possui_Imovel]]<br>
+                    fazendo_previsao=funcao_logistica.predict(parametro)<br>
+                    Probabilidade=funcao_logistica.predict_proba(parametro)<br>
+                    print(fazendo_previsao)<br>
+                    print(Probabilidade) # display the non-purchase and purchase values<br>
+              </code></p>
+          </div>
+   </section>
+    </div>
+  <section id="games" class="gray_fundo section">
+        <div class="main_content ">
+            <h3 class="title_section">What I like to do?</h3>
+            <h4 class="title_section">Play games and watch videos!!!</h4>
+            <div class="main_content ">
+                <p class="title_section">Like all people who work with technology, I think, I like to play games,
+                    in my case I like games like Resident evil, Need For Speed, games that were very present in my high school,
+                    of course I have a love for Yugioh a cartoon Japanese animation that was present in my growth.
+                    I'm a homebody and I spend more time in my apartment studying or just watching videos on Youtube,
+                    videos about games, science are the most common.</p>
+                <p class="title_section">My favorite games :)</p>
+                 <a href="{{url_for('need')}}"><img src="static/images/need_logo.jpg" alt="logo_need" class="logoneed"></a>
+                 <a href="{{url_for('resident')}}"><img  src="static/images/Resident-Evil-Logo.png" alt="logo_resident" class="logore"></a>
+                 <a href="{{url_for('yugioh')}}"><img src="static/images/yugioh_logo_MD.jpg" alt="logo_md" class="logomd"></a>
+                <p class="title_section">
+                    I also go out to the movies or eat at some places, but this type of event is rare.
+                    What I really like to do is go to the supermarket, I like to go see new things, buy healthy food for example,
+                    because I cook my food every day, I don't like processed food very much, it's very common for me to have problems with processed foods.
+                </p>
+            </div>
+        </div>
+  </section>
+<footer class="footer main_back">
+    <p><a >Fabio C. Souza</a></p>
+</body>
+</html>

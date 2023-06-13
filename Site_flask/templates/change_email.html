@@ -1,0 +1,16 @@
+chance_user.html{% extends "header3.html" %}
+{% block content %}
+     <div align="center">
+         <div class="title_section">{{ msg }}</div>
+         <h3 class="title_section">Please Fill in the Fields</h3>
+            <form action={{url_for('change_email_update')}}  method="post" class="form3" autocomplete="off">
+                <div>
+                    <input  id="email" name="email" type="text" placeholder="New E-mail" required>
+                </div><br>
+                <div>
+                    <input  id="newemailConfirmation" name="newemailConfirmation" type="text" placeholder="New E-mail (again)" required>
+                </div><br>
+                <button  type="submit">Change Email</button>
+           </form>
+     </div>
+{% endblock %}

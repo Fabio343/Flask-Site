@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body class="gray_fundo">
+   <asside class="menu">
+     <div class="main_content menu_content">
+       <header>
+         <a href="{{url_for('home')}}"><img src="static/images/my_logo.png" alt="logo_site" class="logo"></a>
+      </header>
+       <nav>
+        <ul>
+          <li>
+            <a href="{{url_for('home')}}">Home</a>
+          </li>
+        </ul>
+       </nav>
+     </div>
+   </asside>
+   <div class="menu-spacing"></div>
+{% block content %}
+{% endblock %}
+</body>
+</html>

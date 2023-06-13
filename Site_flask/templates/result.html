@@ -1,0 +1,35 @@
+{% extends "header.html" %}
+{% block content %}
+<div class="main_content menu_content">
+<p>Here you can read all the commentary that other people have made on this page.</p>
+</div>
+<div class="main_content menu_content">
+                <div class="responsive-table">
+                     <table class="results">
+                         <thead>
+                         <tr>
+                           <th>Name</th>
+                           <th>Commentary</th>
+                         </tr>
+                        </thead>
+                        {% for name,message in joblist %}
+                          <tbody>
+                              <tr>
+                               <td class="results"> {{ name }} </td>
+                               <td class="results"> {{ message }} </td>
+                              </tr>
+                          </tbody>
+                        {% endfor %}
+                     </table>
+                </div>
+</div>
+<div class="main_content menu_content"><h6 class="label_text">Filter a name to see comments</h6></div>
+<div class="main_content menu_content">
+    <div class="menu-spacing"></div>
+    <form class="form label_text" autocomplete="off" action="{{ url_for('research') }}" method="post">
+				<label for="name"></label>
+				<input type="text" name="name" placeholder="Name" id="name" required>
+				<input type="submit" value="SUBMIT">
+	</form>
+</div>
+{% endblock %}

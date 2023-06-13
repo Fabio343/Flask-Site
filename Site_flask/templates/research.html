@@ -1,0 +1,25 @@
+{% extends "header.html" %}
+{% block content %}
+<div class="main_content menu_content">
+</div>
+<div class="main_content menu_content">
+                <div class="responsive-table1">
+                     <table class="results">
+                         <thead>
+                         <tr>
+                           <th>Name</th>
+                           <th>Commentary</th>
+                         </tr>
+                        </thead>
+                        {% for name,message in joblist %}
+                          <tbody>
+                              <tr>
+                               <td class="results"> {{ name }} </td>
+                               <td class="results"> {{ message }} </td>
+                              </tr>
+                          </tbody>
+                        {% endfor %}
+                     </table>
+                </div>
+</div>
+{% endblock %}

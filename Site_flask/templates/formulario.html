@@ -1,0 +1,38 @@
+{% extends "header.html" %}
+{% block content %}
+<body>
+<section>
+    <div class="main_content">
+        <p>
+            Here you can send any question or commentary about my page, the information will be very important
+            to me.
+        </p>
+    </div>
+    <form action="{{url_for('save_db')}} " autocomplete="off" method="POST">
+        <fieldset class="form-grid">
+            <div class="contact-form">
+                <div class="form">
+                    <label class="label_text">Name:</label>
+                    <input type="text" placeholder="Your Name" name="name" id="name" required>
+                </div>
+                <div class="form">
+                    <label class="label_text">Last Name:</label>
+                    <input type="text" placeholder="Your Last Name" name="last_name" id="last_name" required>
+                </div>
+                <div class="form">
+                    <label class="label_text">E-mail:</label>
+                    <input type="email" placeholder="Your E-mail" name="email" id="email" required>
+                </div>
+                <div class="form">
+                    <label class="label_text">Message:</label>
+                    <textarea name="message" placeholder="Your Message" id="message" cols="15" rows="15" required></textarea>
+                </div>
+                <div class="form">
+                    <button type="submit">Send Message</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</section>
+</body>
+{% endblock %}

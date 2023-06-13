@@ -1,0 +1,25 @@
+{% extends "header2.html" %}
+{% block content %}
+          <div align="center" class="label_text">
+              <div class="title_section">{{ msg }}</div>
+             </br>
+                    <h4 class="bottom">
+                         Hi {{session.name}}!!</br> Welcome to the your profile page
+                    </h4></br>
+             <h6>
+                <a href="{{ url_for('change_user') }}" class="btn">Change User</a><br>
+                <a href="{{ url_for('change_password') }}" class="btn">Chance Password</a><br>
+                <a href="{{ url_for('change_email') }}" class="btn">Chance E-mail</a><br>
+                <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+            <h6>
+          </div>
+        <div class="main_content label_text2">
+            <p class="label_text2">Your account details are below:</p>
+
+                    Username: {{ session['name'] }}
+                    <br>
+                    Email: {{ session['email'] }}
+            <br>
+            <br>
+        </div>
+{% endblock %}
